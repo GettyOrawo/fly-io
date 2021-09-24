@@ -1,29 +1,32 @@
-# fly.toml file generated for flyio-ui-ex on 2021-08-26T16:42:20-05:00
+# fly.toml file generated for wandering-fog-6485 on 2021-09-25T00:19:00+03:00
 
-app = "flyio-ui-ex"
+app = "wandering-fog-6485"
 
 kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
 
 [env]
-auto_rollback = false
+
+[deploy]
+  release_command = "/app/bin/fly eval Fly.Release.migrate"
 
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
 
 [[services]]
+  grace_period = "30s"
   http_checks = []
-  internal_port = 4000
+  internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
 
   [services.concurrency]
-    hard_limit = 500
-    soft_limit = 250
-    type = "requests"
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
 
   [[services.ports]]
     handlers = ["http"]
@@ -34,7 +37,7 @@ auto_rollback = false
     port = 443
 
   [[services.tcp_checks]]
-    grace_period = "1s"
+    grace_period = "30s"
     interval = "15s"
     restart_limit = 6
     timeout = "2s"
