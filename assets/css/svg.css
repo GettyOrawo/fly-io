@@ -7,3 +7,131 @@
 svg {
   backface-visibility: hidden;
 }
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+.pie {
+  position: absolute;
+  font-size: 8px;
+  line-height: 1;
+  width: 25em;
+  height: 25em;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.slice {
+  position: absolute;
+  width: 48%;
+  height: 48%;
+  /* 48% is to ensure a space between the slices */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.25em;
+  color: #fff;
+  text-align: center;
+}
+
+.slice-inner span, .tip-inner span {
+  font-size: 2em;
+  display: block;
+}
+
+.slice:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-top-left-radius: 100%;
+  background: #228B22;
+  padding: 2em 0 0 1em;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+/*border-radius: 0 50%;*/
+/* for tooltip */
+
+.slice:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-top-right-radius: 100%;
+  background: #008000;
+  padding: 2em 1em 0 0;
+  box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.slice:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: 100%;
+  background: #2E8B57;
+  padding: 0 0 2em 1em;
+  box-shadow: 2px -2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.slice:nth-child(4) {
+  bottom: 0;
+  right: 0;
+  border-bottom-right-radius: 100%;
+  background: red;
+  padding: 0 1em 2em 0;
+  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.slice-tip:before, .slice-tip:after {
+  content: "";
+  position: absolute;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.75em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 80%;
+  border-radius: 50% 50% 50% 0;
+  z-index: -1;
+  backface-visibility: hidden;
+}
+
+.tip-success {
+  background: #51A952;
+}
+
+.tip-failure {
+  background: #DE4D3C;
+}
+
+.tip-top {
+  transform: translate(0, -90%) rotate(-25deg);
+}
+
+.tip-top .tip-inner {
+  transform: rotate(25deg);
+}
+
+.tip-right {
+  transform: translate(90%, 0) rotate(25deg);
+}
+
+.tip-right .tip-inner {
+  transform: rotate(-25deg);
+}
+
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
